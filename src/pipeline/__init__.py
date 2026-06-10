@@ -1,0 +1,41 @@
+"""ScholarForge pipeline — orchestration, schemas, and prompts."""
+
+from src.pipeline.schemas import (
+    AcademicCV,
+    AcademicEmail,
+    ClicheReport,
+    CoherenceReport,
+    EvidenceAudit,
+    GenerationContext,
+    Language,
+    MotivationLetter,
+    NarrativeSelection,
+    PipelineResult,
+    Profile,
+    RawNarrative,
+    Region,
+    ResearchProposal,
+    Rubric,
+    ScholarshipPosting,
+    SkepticalReview,
+)
+
+__all__ = [
+    "AcademicCV",
+    "AcademicEmail",
+    "ClicheReport",
+    "CoherenceReport",
+    "EvidenceAudit",
+    "GenerationContext",
+    "Language",
+    "MotivationLetter",
+    "NarrativeSelection",
+    "PipelineResult",
+    "Profile",
+    "RawNarrative",
+    "Region",
+    "ResearchProposal",
+    "Rubric",
+    "ScholarshipPosting",
+    "SkepticalReview",
+]
