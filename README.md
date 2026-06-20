@@ -425,10 +425,5 @@ MIT License. See [`LICENSE`](LICENSE) for details.
 ---
 
 <p align="center">
-  <sub>Built by <a href="https://github.com/basilfarra">Basel Al-Farra</a> · Khan Younis, Gaza</sub>
-</p>
----
-
-<p align="center">
-  <sub>Built by <a href="https://github.com/basilfarra">Basel Al-Farra</a> · Khan Younis, Gaza</sub>
+  <sub>Built by <a href="https://github.com/basilfarra">Basil Al-Farra</a> · Khan Younis, Gaza</sub>
 </p>
