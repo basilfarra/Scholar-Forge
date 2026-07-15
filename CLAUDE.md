@@ -31,8 +31,7 @@ tests/                            # one file per agent, mocked with unittest.moc
 ```
 
 ## Status
-- ✅ `ProfileIngestionAgent`, `ScholarshipAnalysisAgent` — built, tested (20 tests passing)
-- 🔨 `NarrativeSelectionAgent` — schema finalized (below), agent not implemented yet
+- ✅ `ProfileIngestionAgent`, `ScholarshipAnalysisAgent`, `NarrativeSelectionAgent` — built, tested (27 tests passing)
 - 📋 Agents 4–10 — designed, not started
 
 ## Architecture rules
@@ -48,18 +47,8 @@ tests/                            # one file per agent, mocked with unittest.moc
   against this for `NarrativePlan` — it's fragile in practice. Keep evidence
   fields as self-contained text instead.
 
-## Current task: NarrativeSelectionAgent
-
-Target `NarrativePlan` (replaces the placeholder at the bottom of
-`src/pipeline/schemas.py`): `dominant_frame`, `frames_considered`,
-`frame_rationale`, `rubric_alignment` (criterion → evidence pairs, must be
-non-empty), `rejected_elements` (element + reason), `document_guidance`
-(per-`DocumentType`: `lead_with` / `de_emphasize` / `angle`).
-
-**Once this is committed to `schemas.py`, delete this section and replace it
-with:** `NarrativePlan schema — see src/pipeline/schemas.py`. Don't let this
-file describe code that already exists elsewhere — that's the exact mistake
-the README made once already.
+## Current task
+NarrativePlan schema — see src/pipeline/schemas.py
 
 ## Boundaries
 - No FastAPI, no frontend, no `docs/` scaffolding before the 3-agent

@@ -36,6 +36,12 @@ class DegreeLevel(str, Enum):
     PHD      = "phd"
     ANY      = "any"
 
+class DocumentType(str, Enum):
+    MOTIVATION_LETTER = "motivation_letter"
+    ACADEMIC_CV        = "academic_cv"
+    RESEARCH_PROPOSAL  = "research_proposal"
+    ACADEMIC_EMAIL      = "academic_email"
+
 
 # ─── ApplicantProfile nested models ────────────────────────────────────────────
 
@@ -212,9 +218,55 @@ class ScholarshipRubric(BaseModel):
         return self
 
 
-class NarrativePlan(BaseModel):
-    """Output of NarrativeSelectionAgent. Placeholder for Phase 1 completion."""
-    primary_narrative: str
-    key_evidence_points: list[str]   = Field(default_factory=list)
-    documents_to_produce: list[str]  = Field(default_factory=list)
+class RubricAlignment(BaseModel):
+    """A single evaluation criterion paired with the profile evidence that supports it."""
+    criterion: str          # matches (or closely paraphrases) an EvaluationCriterion.criterion
+    evidence: str           # self-contained text — never a structural index into the profile
     model_config = {"extra": "forbid"}
+
+
+class RejectedElement(BaseModel):
+    """A story element deliberately excluded from the narrative, and why."""
+    element: str            # self-contained description of the excluded element
+    reason: str
+    model_config = {"extra": "forbid"}
+
+
+class DocumentGuidance(BaseModel):
+    """Per-document steering for the generation agents that consume a NarrativePlan."""
+    document_type: DocumentType
+    lead_with:    list[str] = Field(default_factory=list)
+    de_emphasize: list[str] = Field(default_factory=list)
+    angle: str               # one sentence: how this document should frame the narrative
+    model_config = {"extra": "forbid"}
+
+
+class NarrativePlan(BaseModel):
+    """
+    Output of NarrativeSelectionAgent.
+    Chooses which parts of an ApplicantProfile serve a specific ScholarshipRubric,
+    justifies the choice, and logs what was excluded and why.
+    """
+    dominant_frame: str
+    # The single narrative angle chosen, e.g. "research-driven problem solver"
+
+    frames_considered: list[str] = Field(default_factory=list)
+    # Alternative frames evaluated before settling on dominant_frame
+
+    frame_rationale: str
+    # Why dominant_frame won over the alternatives, given this rubric
+
+    rubric_alignment: list[RubricAlignment] = Field(default_factory=list)
+    rejected_elements: list[RejectedElement] = Field(default_factory=list)
+
+    document_guidance: list[DocumentGuidance] = Field(default_factory=list)
+
+    model_config = {"extra": "forbid"}
+
+    @model_validator(mode="after")
+    def must_have_rubric_alignment(self) -> "NarrativePlan":
+        if not self.rubric_alignment:
+            raise ValueError(
+                "NarrativePlan must contain at least one rubric_alignment entry."
+            )
+        return self
