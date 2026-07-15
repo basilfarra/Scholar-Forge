@@ -1,3 +1,5 @@
+
+
 <p align="center">
 <img width="1774" height="887" alt="ScholarForge" src="https://github.com/user-attachments/assets/7d2c6a51-d525-44a5-bd34-4767f685c9ec" />
 </p>
@@ -423,5 +425,5 @@ MIT License. See [`LICENSE`](LICENSE) for details.
 ---
 
 <p align="center">
-  <sub>Built by <a href="https://github.com/basilfarra">Basel Al-Farra</a> · Khan Younis, Gaza</sub>
+  <sub>Built by <a href="https://github.com/basilfarra">Basil Al-Farra</a> · Khan Younis, Gaza</sub>
 </p>
